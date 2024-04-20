@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Appodeal/Demo/Scenes/AppodealDemoScene.unity
-    guid: 2ad88b269161f4e84aad9fcef055bf58
+    path: Assets/FindDiffereces/Scenes/GameplayScene.unity
+    guid: ac2899f456600f74ba4d33d63538e55d
   m_configObjects: {}
