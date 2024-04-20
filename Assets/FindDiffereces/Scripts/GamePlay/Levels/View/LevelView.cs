@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FindDifferences.GamePlay
 {
-    public class LevelView : MonoBehaviour
+    public class LevelView : MonoBehaviour, IDifferencesFoundNotifier
     {
         [SerializeField] private Differences[] _differences;
 
@@ -22,16 +22,22 @@ namespace FindDifferences.GamePlay
                 difference.OnDifferenceFound -= OnDifferenceFound;
         }
 
+        [ContextMenu("Reload Level")]
+        public void Restart()
+        {
+            foreach (var difference in _differences)
+                difference.InteractionEnable(true);
+        }
+
+
         private void OnDifferenceFound(DifferencesData data)
         {
             OnDifferencesFound?.Invoke(data);
         }
 
-        [ContextMenu ("Reload Level")]
-        public void Restart()
+        private void Reset()
         {
-            foreach (var difference in _differences)
-                difference.InteractionEnable(true);
+            _differences = GetComponentsInChildren<Differences>();
         }
     }
 }

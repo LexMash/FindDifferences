@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class StateChangeProvider
+    public sealed class StateChangeProvider
     {
         private readonly IGameStateMachine _stateMachine;
 

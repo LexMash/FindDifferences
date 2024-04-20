@@ -1,18 +1,33 @@
-﻿using System;
+﻿using FindDiffereces.Factories;
+using System;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Infrastructure
 {
-    public class GameStateMachine : IGameStateMachine, IDisposable
-    {      
+    public sealed class GameStateMachine : IGameStateMachine, IInitializable, IDisposable
+    {
+        private readonly GameStateFactory _factory;
         private readonly Dictionary<GameStateType, IGameState> _stateMap = new();
         private IGameState _currentState;
 
-        public GameStateMachine(IGameState state)
+        private bool _isInitialize;
+
+        public GameStateMachine(GameStateFactory factory)
         {
+            _factory = factory;
         }
 
-        public virtual void SetState(GameStateType type)
+        public void Initialize()
+        {
+
+
+            //TODO создание стейтов
+
+            _isInitialize = true;
+        }
+
+        public void SetState(GameStateType type)
         {
             if(_stateMap.TryGetValue(type, out IGameState state))
             {
@@ -30,7 +45,10 @@ namespace Infrastructure
 
         public void Tick()
         {
-            _currentState?.Update();
+            if (!_isInitialize)
+                return;
+
+            _currentState.Update();
         }
 
         public void Dispose()
@@ -38,13 +56,6 @@ namespace Infrastructure
             _currentState = null;
 
             _stateMap.Clear();
-        }
-
-        protected class StateMachineException : SystemException
-        {
-            public StateMachineException(string message) : base(message)
-            {
-            }
         }
     }
 }

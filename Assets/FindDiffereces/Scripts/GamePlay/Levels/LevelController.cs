@@ -24,8 +24,14 @@ namespace FindDiffereces.GamePlay.Levels
         {
             NullCheck(level);
 
-            if (_currentLevel && _currentLevel != level)
+            if (_currentLevel != level && _currentLevel)
                 _currentLevel.OnDifferencesFound -= OnDifferenesFound;
+
+            if (_currentLevel == level)
+            {
+                _countService.Setup(_currentLevel.DifferencesCount);
+                return;
+            }              
 
             _currentLevel = level;
 
@@ -54,12 +60,13 @@ namespace FindDiffereces.GamePlay.Levels
         {
             _countService.CountingCompleted -= OnCountingCompleted;
             _currentLevel.OnDifferencesFound -= OnDifferenesFound;
+            _currentLevel = null;
         }
 
         private static void NullCheck<T>(T TClass) where T : class
         {
             if (TClass == null)
-                new ArgumentNullException($"The LevelController cannot depends on NULL {typeof(t)}");
+                new ArgumentNullException($"The LevelController cannot depends on NULL {typeof(T)}");
         }
     }
 }

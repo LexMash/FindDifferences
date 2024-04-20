@@ -1,12 +1,13 @@
 ﻿using Infrastructure;
+using Zenject;
 
 namespace FindDiffereces.Factories
 {
     public class GameStateFactory
     {
-        private readonly DIContainer _container;
+        private readonly DiContainer _container;
 
-        public GameStateFactory(DIContainer container)
+        public GameStateFactory(DiContainer container)
         {
             _container = container;
         }
