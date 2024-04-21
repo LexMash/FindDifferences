@@ -1,4 +1,5 @@
-﻿using FindDifferences.UI;
+﻿using FindDiffereces.Data;
+using FindDifferences.UI;
 using System;
 using UnityEngine;
 using Zenject;
@@ -9,25 +10,23 @@ namespace FindDiffereces.GamePlay.Time
     {
         public event Action CountStart;
         public event Action TimeOut;
-        public event Action TimeChanged;      
+        public event Action TimeChanged;
+        public string CurrentTimeString { get; private set; } = string.Empty;
 
-        private float _updateInterval;
         private const string TIME_FORMAT = "{0:00} : {1:00}";
-
+        private const float UPDATE_INTERVAL = 1f;
         private readonly ITimer _timer;
         private readonly TimerWidget _widget;
-
-        private readonly float _mainTimeInterval;
+        private readonly GameConfig _gameConfig;
 
         private bool _isActive;
         private float _counter;
 
-        public TimeController(ITimer timer, TimerWidget widget, float mainTimeInterval, float updateInterval = 1f)
+        public TimeController(ITimer timer, TimerWidget widget, GameConfig gameConfig)
         {
             _timer = timer;
             _widget = widget;
-            _mainTimeInterval = mainTimeInterval;
-            _updateInterval = updateInterval;
+            _gameConfig = gameConfig;
 
             _timer.TimeOut += OnTimeOut;
         }
@@ -36,7 +35,8 @@ namespace FindDiffereces.GamePlay.Time
         {
             _isActive = false;
 
-            _widget.UpdateView(ConvertTimeToString(0f));
+            CurrentTimeString = ConvertTimeToString(0f);
+            _widget.UpdateView(CurrentTimeString);
 
             TimeOut?.Invoke();
         }
@@ -44,10 +44,15 @@ namespace FindDiffereces.GamePlay.Time
         public void Start()
         {
             _isActive = true;
-            _counter = _updateInterval;
+            _counter = UPDATE_INTERVAL;
 
-            _timer.Start(_mainTimeInterval);
+            _timer.Start(_gameConfig.TimeForFindInSeconds);
             CountStart?.Invoke();
+        }
+
+        public void Stop()
+        {
+            _isActive = false;
         }
 
         public void AddTime(float time)
@@ -69,13 +74,18 @@ namespace FindDiffereces.GamePlay.Time
 
             if (_counter <= 0)
             {
-                _counter = _updateInterval;
+                _counter = UPDATE_INTERVAL;
 
-                var timeToString = ConvertTimeToString(_timer.CurrentTime + 1);
+                CurrentTimeString = ConvertTimeToString(_timer.CurrentTime + 1);
 
                 TimeChanged?.Invoke();
-                _widget.UpdateView(timeToString);
+                _widget.UpdateView(CurrentTimeString);
             }
+        }
+
+        public void Dispose()
+        {
+            _timer.TimeOut -= OnTimeOut;
         }
 
         private string ConvertTimeToString(float time)
@@ -84,11 +94,6 @@ namespace FindDiffereces.GamePlay.Time
             int seconds = Mathf.FloorToInt(time % 60);
 
             return string.Format(TIME_FORMAT, minutes, seconds);
-        }
-
-        public void Dispose()
-        {
-            _timer.TimeOut -= OnTimeOut;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using FindDiffereces.Factories;
+using FindDiffereces.GamePlay.FSM.States;
+using FindDifferences.FSM.States;
 using System;
 using System.Collections.Generic;
 using Zenject;
@@ -20,9 +22,11 @@ namespace Infrastructure
 
         public void Initialize()
         {
-
-
-            //TODO создание стейтов
+            _stateMap[GameStateType.Init] = _factory.CreateState<InitializeState>();
+            _stateMap[GameStateType.LevelLoad] = _factory.CreateState<LoadLevelState>();
+            _stateMap[GameStateType.Wait] = _factory.CreateState<WaitTapState>();
+            _stateMap[GameStateType.GamePlay] = _factory.CreateState<GamePlayState>();
+            _stateMap[GameStateType.LevelRestart] = _factory.CreateState<RestartLevelState>();
 
             _isInitialize = true;
         }

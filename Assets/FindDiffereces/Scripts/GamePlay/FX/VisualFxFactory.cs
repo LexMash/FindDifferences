@@ -1,8 +1,8 @@
 ﻿using FindDiffereces.GamePlay.FX;
+using FindDiffereces.UI;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -10,15 +10,22 @@ namespace FindDiffereces.Factories
 {
     public sealed class VisualFxFactory : IDisposable, IVisualFxFactory, IInitializable
     {
-        private readonly RectTransform _parent;
+        private readonly UIFxRoot _parent;
 
         private readonly Dictionary<FxType, List<UIVisualFxBase>> _released = new();
         private readonly List<UIVisualFxBase> _active = new();
         private readonly List<AsyncOperationHandle> _handles = new();
+        private UIVisualFxBase _fx; //fortest
+
+        public VisualFxFactory(UIVisualFxBase fx, UIFxRoot parent)
+        {
+            _fx = fx;
+            _parent = parent;
+        }
 
         public void Initialize()
         {
-            //prefabload
+            //TODO prefab load
         }
 
         public UIVisualFxBase CreateFx(FxType type)
@@ -34,10 +41,10 @@ namespace FindDiffereces.Factories
             }
             else
             {
-                fx = UnityEngine.Object.Instantiate(null, _parent).GetComponent<UIVisualFxBase>();
+                fx = UnityEngine.Object.Instantiate(_fx, _parent.Transform).GetComponent<UIVisualFxBase>();
                 _active.Add(fx);
             }
-
+            
             fx.Shown += FxShown;
 
             return fx;

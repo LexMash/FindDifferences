@@ -2,6 +2,7 @@
 {
     public enum GameStateType
     {
+        Init,
         LevelLoad,
         LevelRestart,
         Wait,

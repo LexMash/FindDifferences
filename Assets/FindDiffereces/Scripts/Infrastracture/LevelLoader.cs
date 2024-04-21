@@ -25,7 +25,7 @@ namespace FindDiffereces.Infrastracture
             _uiRoot = uiRoot;
         }
 
-        public async Task<LevelView> LoadLevel(uint index)
+        public async Task<LevelView> LoadLevel(int index)
         {
             if (_currentLevel != null)
             {
@@ -39,7 +39,7 @@ namespace FindDiffereces.Infrastracture
                 }
             }
 
-            _currentLevelIndex = (int)index;
+            _currentLevelIndex = index;
 
             _asyncHadle = Addressables.LoadAssetAsync<GameObject>(LEVEL_PATH + index);
 

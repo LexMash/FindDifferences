@@ -11,10 +11,7 @@ namespace FindDiffereces.GamePlay.FX
         public event Action<UIVisualFxBase> Shown;
 
         public void SetPosition(Vector2 position) 
-            => _transform.anchoredPosition = position;
-
-        public void SetParent(RectTransform parent) 
-            => _transform.parent = parent;
+            => _transform.position = (Vector3)position;
 
         public abstract void Show();
         public abstract void Hide();

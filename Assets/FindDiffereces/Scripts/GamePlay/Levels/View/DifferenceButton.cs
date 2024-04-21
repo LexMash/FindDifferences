@@ -9,12 +9,13 @@ namespace FindDifferences.GamePlay
     {
         [SerializeField] private Image _image;
 
-        public Vector2 Position => _image.rectTransform.anchoredPosition;
+        public Vector2 Position => _image.rectTransform.position;
 
         public event Action OnDifferenceClicked;
 
         public void OnPointerClick(PointerEventData eventData)
-        {           
+        {
+            Debug.Log("button " + Position);
             OnDifferenceClicked?.Invoke();
         }
 

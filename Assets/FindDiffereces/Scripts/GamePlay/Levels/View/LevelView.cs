@@ -22,7 +22,6 @@ namespace FindDifferences.GamePlay
                 difference.OnDifferenceFound -= OnDifferenceFound;
         }
 
-        [ContextMenu("Reload Level")]
         public void Restart()
         {
             foreach (var difference in _differences)

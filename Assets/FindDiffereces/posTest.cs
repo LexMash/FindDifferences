@@ -4,18 +4,13 @@ using UnityEngine;
 
 namespace FindDifferences
 {
-    public class State : MonoBehaviour
+    public class posTest : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
+        public RectTransform RectTransform;
         // Update is called once per frame
         void Update()
         {
-        
+            print(RectTransform.localPosition);
         }
     }
 }

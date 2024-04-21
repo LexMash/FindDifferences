@@ -4,56 +4,45 @@ using System;
 
 namespace FindDiffereces.GamePlay.FX
 {
-    public class VisualFxController : IDisposable
+    public class VisualFxController : IDisposable, IVisualFxController
     {
         private readonly IDifferencesFoundNotifier _differencesNotifier;
-        private readonly IGameStateNotifier _gameStateNotifier;
-
         private readonly IVisualFxSpawnService _spawnService;
 
         public VisualFxController(
-            IVisualFxSpawnService spawnService, 
-            IDifferencesFoundNotifier differencesNotifier, 
-            IGameStateNotifier gameStateNotifier)
+            IVisualFxSpawnService spawnService,
+            IDifferencesFoundNotifier differencesNotifier)
         {
             _spawnService = spawnService;
 
-            _differencesNotifier = differencesNotifier;            
+            _differencesNotifier = differencesNotifier;
             _differencesNotifier.DifferencesFound += OnDifferencesFound;
+        }
 
-            _gameStateNotifier.Won += OnGameWon;
-            _gameStateNotifier.Lost += OnGameLost;
-            _gameStateNotifier.Restarted += OnGameRestarted;
+        public void ShowWInFx()
+        {
+            _spawnService.ShowWinFx();
+        }
+
+        public void ShowLostFx()
+        {
+            _spawnService.ShowLostFx();
+        }
+
+        public void HideAllFx()
+        {
+            _spawnService.HideAll();
         }
 
         public void Dispose()
         {
             _differencesNotifier.DifferencesFound -= OnDifferencesFound;
-
-            _gameStateNotifier.Won -= OnGameWon;
-            _gameStateNotifier.Lost -= OnGameLost;
-            _gameStateNotifier.Restarted -= OnGameRestarted;
         }
 
         private void OnDifferencesFound(DifferencesData data)
         {
             foreach (var position in data.Positons)
                 _spawnService.ShowTouchFxAt(position);
-        }
-
-        private void OnGameWon()
-        {
-            _spawnService.ShowWinFx();
-        }
-
-        private void OnGameLost()
-        {
-            _spawnService.ShowLostFx();
-        }
-
-        private void OnGameRestarted()
-        {
-            _spawnService.HideAll();
         }
     }
 }

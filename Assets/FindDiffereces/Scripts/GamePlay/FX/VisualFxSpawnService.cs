@@ -1,5 +1,6 @@
 ﻿using FindDiffereces.Factories;
 using FindDiffereces.GamePlay.FX;
+using FindDiffereces.UI;
 using UnityEngine;
 
 namespace FindDifferences.GamePlay.FX
@@ -7,12 +8,14 @@ namespace FindDifferences.GamePlay.FX
     public class VisualFxSpawnService : IVisualFxSpawnService
     {
         private readonly IVisualFxFactory _factory;
+        private readonly UIFxRoot _uIFxRoot;
         private readonly Vector2 _endGameParticlesTransform;
 
-        public VisualFxSpawnService(IVisualFxFactory factory, Vector2 endGameParticlesTransform)
+        public VisualFxSpawnService(IVisualFxFactory factory, UIFxRoot uIFxRoot)
         {
             _factory = factory;
-            _endGameParticlesTransform = endGameParticlesTransform;
+            _uIFxRoot = uIFxRoot;
+            _endGameParticlesTransform = _uIFxRoot.EndGameParticlesPosition.position;
         }
 
         public void ShowTouchFxAt(Vector2 position)

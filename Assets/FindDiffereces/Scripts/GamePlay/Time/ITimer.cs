@@ -9,8 +9,6 @@ namespace FindDiffereces.GamePlay
         float CurrentTime { get; }
 
         void Start(float startTime);
-        void Pause();
-        public void UnPause();
         void Update(float timeDelta);
     }
 }

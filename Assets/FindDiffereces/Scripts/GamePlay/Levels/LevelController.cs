@@ -49,6 +49,7 @@ namespace FindDiffereces.GamePlay.Levels
 
         private void OnDifferencesFound(DifferencesData data)
         {
+            DifferencesFound?.Invoke(data);
             _countService.UpdateCount();
         }
 
