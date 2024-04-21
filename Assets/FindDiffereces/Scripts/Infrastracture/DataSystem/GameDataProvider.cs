@@ -9,11 +9,11 @@ namespace FindDiffereces.Infrastracture.DataSystem
         public event Action DataChanged;
         public IReadOnlyGameData Data => _gameData;
 
-        private readonly ILevelNotifier _levelNotifier;
+        private readonly ILevelStateNotifier _levelNotifier;
         private readonly ISaveLoadService _saveLoadService;
         private GameData _gameData;
      
-        public GameDataProvider(ISaveLoadService saveLoadService, ILevelNotifier levelNotifier) 
+        public GameDataProvider(ISaveLoadService saveLoadService, ILevelStateNotifier levelNotifier) 
         {
             _saveLoadService = saveLoadService;
             

@@ -20,5 +20,10 @@ namespace FindDifferences.GamePlay
 
         public void InteractionEnable(bool isEnable) 
             => _image.enabled = isEnable;
+
+        private void Reset()
+        {
+            _image = GetComponent<Image>();
+        }
     }
 }

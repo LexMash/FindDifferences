@@ -8,4 +8,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FindDiffereces/Scenes/GameplayScene.unity
     guid: ac2899f456600f74ba4d33d63538e55d
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 0983801b059b45d4d9bbda3bc47257d9, type: 2}

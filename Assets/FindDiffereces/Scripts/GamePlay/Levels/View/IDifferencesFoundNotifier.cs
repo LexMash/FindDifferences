@@ -4,6 +4,6 @@ namespace FindDifferences.GamePlay
 {
     public interface IDifferencesFoundNotifier
     {
-        event Action<DifferencesData> OnDifferencesFound;
+        event Action<DifferencesData> DifferencesFound;
     }
 }

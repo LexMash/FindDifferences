@@ -3,10 +3,12 @@ using System;
 
 namespace FindDiffereces.GamePlay.Levels
 {
-    public class LevelController : ILevelController, IDisposable
+    public class LevelController : ILevelController, IDifferencesFoundNotifier, ILevelStateNotifier, IDisposable
     {
         public event Action LevelCompleted;
         public event Action LevelRestarted;
+
+        public event Action<DifferencesData> DifferencesFound;
 
         private readonly ICountService _countService;
 
@@ -20,12 +22,12 @@ namespace FindDiffereces.GamePlay.Levels
             _countService.CountingCompleted += OnCountingCompleted;
         }
 
-        public void SetLevel(LevelView level)
+        public void Init(LevelView level)
         {
             NullCheck(level);
 
             if (_currentLevel != level && _currentLevel)
-                _currentLevel.OnDifferencesFound -= OnDifferenesFound;
+                _currentLevel.DifferencesFound -= OnDifferencesFound;
 
             if (_currentLevel == level)
             {
@@ -35,7 +37,7 @@ namespace FindDiffereces.GamePlay.Levels
 
             _currentLevel = level;
 
-            _currentLevel.OnDifferencesFound += OnDifferenesFound;
+            _currentLevel.DifferencesFound += OnDifferencesFound;
 
             _countService.Setup(_currentLevel.DifferencesCount);
         }
@@ -45,7 +47,7 @@ namespace FindDiffereces.GamePlay.Levels
             LevelCompleted?.Invoke();
         }
 
-        private void OnDifferenesFound(DifferencesData data)
+        private void OnDifferencesFound(DifferencesData data)
         {
             _countService.UpdateCount();
         }
@@ -59,7 +61,7 @@ namespace FindDiffereces.GamePlay.Levels
         public void Dispose()
         {
             _countService.CountingCompleted -= OnCountingCompleted;
-            _currentLevel.OnDifferencesFound -= OnDifferenesFound;
+            _currentLevel.DifferencesFound -= OnDifferencesFound;
             _currentLevel = null;
         }
 

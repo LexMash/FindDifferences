@@ -7,7 +7,7 @@ using Product = UnityEngine.Purchasing.Product;
 
 namespace FindDiffereces.Infrastracture.Purchase
 {
-    public class UnityIAPurchaseProvider : IPurchaseProvider, IDetailedStoreListener, IInitializable
+    public class UnityIAPurchaseProvider : IPurchaseProvider, IDetailedStoreListener, IInitializable, IPurchaseNotifier
     {
         public event Action<string> PurchaseCompleted;
 
@@ -30,7 +30,6 @@ namespace FindDiffereces.Infrastracture.Purchase
         public void Buy(string purchaseID = MORE_TIME)
         {
             _storeController.InitiatePurchase(purchaseID);
-            PurchaseCompleted?.Invoke(purchaseID);
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
@@ -67,6 +66,8 @@ namespace FindDiffereces.Infrastracture.Purchase
             var product = purchaseEvent.purchasedProduct;
 
             Debug.Log($"Purchase Complete - Product: {product.definition.id}");
+
+            PurchaseCompleted?.Invoke(product.definition.id);
 
             return PurchaseProcessingResult.Complete;
         }

@@ -2,9 +2,9 @@
 
 namespace FindDiffereces.GamePlay.Levels
 {
-    public interface ILevelController : ILevelNotifier
+    public interface ILevelController : ILevelStateNotifier
     {
         void RestartLevel();
-        void SetLevel(LevelView level);
+        void Init(LevelView level);
     }
 }

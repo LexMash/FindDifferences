@@ -2,7 +2,7 @@
 
 namespace FindDiffereces.GamePlay.Levels
 {
-    public interface ILevelNotifier
+    public interface ILevelStateNotifier
     {
         public event Action LevelCompleted;
         public event Action LevelRestarted;

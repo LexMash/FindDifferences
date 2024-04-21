@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace FindDifferences.GamePlay
 {
-    public class LevelView : MonoBehaviour, IDifferencesFoundNotifier
+    public class LevelView : MonoBehaviour
     {
         [SerializeField] private Differences[] _differences;
 
-        public event Action<DifferencesData> OnDifferencesFound;
+        public event Action<DifferencesData> DifferencesFound;
         public int DifferencesCount => _differences.Length;
 
         private void OnEnable()
@@ -32,7 +32,7 @@ namespace FindDifferences.GamePlay
 
         private void OnDifferenceFound(DifferencesData data)
         {
-            OnDifferencesFound?.Invoke(data);
+            DifferencesFound?.Invoke(data);
         }
 
         private void Reset()

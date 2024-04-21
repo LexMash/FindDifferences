@@ -1,6 +1,12 @@
 using AppodealAds.Unity.Api;
+using FindDiffereces.Data;
+using FindDiffereces.GamePlay;
+using FindDiffereces.GamePlay.Time;
+using FindDiffereces.Infrastracture;
 using FindDiffereces.Infrastracture.Ads;
 using FindDiffereces.Infrastracture.Purchase;
+using FindDiffereces.UI;
+using FindDifferences.UI;
 using TMPro;
 using UnityEngine;
 
@@ -8,31 +14,19 @@ namespace FindDifferences
 {
     public class ForTest : MonoBehaviour
     {
-        public TextMeshProUGUI _mesh;
-        // Start is called before the first frame update
-        AppodealAdsProvider purchaseProvider;
+        public TimerWidget _widget;
+        TimeController controller;
 
-        void Start()
+        private void Start()
         {
-            _mesh.text = "start";
-            purchaseProvider = new AppodealAdsProvider(_mesh);
-            purchaseProvider.Initialize();
-            purchaseProvider.CasheAds();
-            purchaseProvider.AdsCashed += PurchaseProvider_AdsCashed;
+            var timer = new Timer();
+            controller = new TimeController(timer, _widget, 10f);
+            controller.Start();
         }
 
-        private void PurchaseProvider_AdsCashed(bool obj)
+        private void Update()
         {
-            purchaseProvider.ShowAds();
+            controller.Tick();
         }
-
-        // Update is called once per frame
-        //void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        purchaseProvider.ShowAds();
-        //    }
-        //}
     }
 }

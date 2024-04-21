@@ -5,7 +5,7 @@ namespace FindDiffereces.Infrastracture
 {
     public interface IAssetProvider
     {
-        Task<T> Load<T>(string key) where T : MonoBehaviour;
-        void UnLoad<T>(T TObject) where T : MonoBehaviour;
+        Task<T> Load<T>(string key);
+        void UnLoad<T>(T TObject);
     }
 }
