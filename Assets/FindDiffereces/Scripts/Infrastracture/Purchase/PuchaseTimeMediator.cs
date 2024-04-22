@@ -1,4 +1,5 @@
-﻿using FindDifferences.GamePlay.Time;
+﻿using FindDiffereces.UI;
+using FindDifferences.GamePlay.Time;
 using FindDifferences.Infrastracture.Purchase;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,22 @@ namespace FindDiffereces.Infrastracture.Purchase
     {
         private readonly IPurchaseNotifier _purchaseNotifier;
         private readonly ITimeController _timeController;
-
+        private readonly PurchaseButton _purchaseButton;
         private readonly Dictionary<string, int> _valueMap = new();
 
-        public PuchaseTimeMediator(IPurchaseNotifier purchaseNotifier, ITimeController timeController)
+        public PuchaseTimeMediator(IPurchaseNotifier purchaseNotifier, ITimeController timeController, PurchaseButton purchaseButton)
         {
             _purchaseNotifier = purchaseNotifier;
             _timeController = timeController;
+            _purchaseButton = purchaseButton;
 
             _valueMap["more_time"] = 10; //для примера
 
+#if UNITY_EDITOR
             _purchaseNotifier.PurchaseCompleted += PurchaseCompleted;
+#elif PLATFORM_ANDROID
+            _purchaseButton.PurchaseCompleted += PurchaseCompleted;
+#endif            
         }
 
         private void PurchaseCompleted(string id)
@@ -35,7 +41,11 @@ namespace FindDiffereces.Infrastracture.Purchase
 
         public void Dispose()
         {
+#if UNITY_EDITOR
             _purchaseNotifier.PurchaseCompleted -= PurchaseCompleted;
+#elif PLATFORM_ANDROID
+            _purchaseButton.PurchaseCompleted -= PurchaseCompleted;
+#endif
         }
     }
 }

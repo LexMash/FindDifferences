@@ -835,6 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 131464977}
+  _bttn: {fileID: 1748118249}
 --- !u!4 &232100842
 Transform:
   m_ObjectHideFlags: 0
@@ -2785,6 +2786,7 @@ GameObject:
   - component: {fileID: 1748118245}
   - component: {fileID: 1748118247}
   - component: {fileID: 1748118248}
+  - component: {fileID: 1748118249}
   m_Layer: 5
   m_Name: BuyTimeButton
   m_TagString: Untagged
@@ -2922,6 +2924,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 1748118247}
+--- !u!114 &1748118249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748118243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a22efa380efb744d817d10598e0136b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bttn: {fileID: 1748118247}
 --- !u!1 &1767181314
 GameObject:
   m_ObjectHideFlags: 0
