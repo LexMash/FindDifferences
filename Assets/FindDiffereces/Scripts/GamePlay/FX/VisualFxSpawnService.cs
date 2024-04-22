@@ -1,6 +1,5 @@
-﻿using FindDiffereces.Factories;
-using FindDiffereces.GamePlay.FX;
-using FindDiffereces.UI;
+﻿using FindDifferences.Factories;
+using FindDifferences.UI;
 using UnityEngine;
 
 namespace FindDifferences.GamePlay.FX

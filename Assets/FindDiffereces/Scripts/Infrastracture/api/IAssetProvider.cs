@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace FindDiffereces.Infrastracture
+namespace FindDifferences.Infrastracture
 {
     public interface IAssetProvider
     {

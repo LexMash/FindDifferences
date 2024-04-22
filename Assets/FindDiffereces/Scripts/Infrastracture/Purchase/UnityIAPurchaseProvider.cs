@@ -5,9 +5,9 @@ using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using Product = UnityEngine.Purchasing.Product;
 
-namespace FindDiffereces.Infrastracture.Purchase
+namespace FindDifferences.Infrastracture.Purchase
 {
-    public class UnityIAPurchaseProvider : IPurchaseProvider, IDetailedStoreListener, IInitializable, IPurchaseNotifier
+    public class UnityIAPurchaseProvider : IPurchaseProvider, IDetailedStoreListener, IPurchaseNotifier
     {
         public event Action<string> PurchaseCompleted;
 

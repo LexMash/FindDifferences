@@ -1,7 +1,7 @@
-﻿using FindDiffereces.Infrastracture.DataSystem;
+﻿using FindDifferences.Infrastracture.DataSystem;
 using System;
 
-namespace FindDiffereces.Infrastracture.api
+namespace FindDifferences.Infrastracture.api
 {
     public interface ISaveLoadService
     {

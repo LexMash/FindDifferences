@@ -1,10 +1,10 @@
-﻿using FindDiffereces.GamePlay;
-using FindDiffereces.GamePlay.Time;
+﻿using FindDifferences.GamePlay;
+using FindDifferences.GamePlay.Time;
 using FindDifferences.UI;
 using UnityEngine;
 using Zenject;
 
-namespace FindDiffereces.Scripts.Installers
+namespace FindDifferences.Scripts.Installers
 {
     public class TimeSystemInstaller : MonoInstaller
     {

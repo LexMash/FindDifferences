@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace FindDiffereces.Infrastracture.DataSystem
+namespace FindDifferences.Infrastracture.DataSystem
 {
     [Serializable]
     public class GameData : IReadOnlyGameData

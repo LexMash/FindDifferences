@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace FindDiffereces.UI
+namespace FindDifferences.UI
 {
     public class LevelLabelWidget : MonoBehaviour
     {

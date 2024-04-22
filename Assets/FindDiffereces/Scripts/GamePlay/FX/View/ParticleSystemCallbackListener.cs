@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FindDiffereces.GamePlay.FX.View
+namespace FindDifferences.GamePlay.FX.View
 {
     public class ParticleSystemCallbackListener : MonoBehaviour
     {

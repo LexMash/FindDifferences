@@ -1,43 +1,53 @@
-﻿using FindDiffereces.GamePlay.FX;
-using FindDiffereces.GamePlay.Levels;
-using FindDiffereces.GamePlay.Time;
+﻿using FindDifferences.GamePlay.FX;
+using FindDifferences.GamePlay.Levels;
+using FindDifferences.GamePlay.Time;
 using Infrastructure;
 using StateMachine;
 
-namespace FindDiffereces.GamePlay.FSM.States
+namespace FindDifferences.GamePlay.FSM.States
 {
     public class GamePlayState : GameStateBase
     {
         private readonly ITimeController _timeController;
-        private readonly ILevelController _levelController;
+        private readonly ILevelStateNotifier _levelStateNotifier;
         private readonly IVisualFxController _fxController;
 
-        public GamePlayState(StateChangeProvider stateChangeProvider) : base(stateChangeProvider)
+        public GamePlayState(
+            StateChangeProvider stateChangeProvider,
+            ITimeController timeController,
+            ILevelStateNotifier levelStateNotifier,
+            IVisualFxController visualFxController
+            ) : base(stateChangeProvider)
         {
+            _timeController = timeController;
+            _levelStateNotifier = levelStateNotifier;
+            _fxController = visualFxController;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            _levelController.LevelCompleted += ChangeState;
-
             _timeController.Start();
+
+            _levelStateNotifier.LevelCompleted += ChangeState;
             _timeController.TimeOut += ChangeState;
         }
-
+         
         public override void Exit() 
         { 
             base.Exit();
 
             _fxController.HideAllFx();
 
-            _levelController.LevelCompleted -= ChangeState;
+            _levelStateNotifier.LevelCompleted -= ChangeState;
             _timeController.TimeOut -= ChangeState;
         }
 
         private void ChangeState()
         {
+            _timeController.Stop();
+
             _stateChangeProvider.ChangeState(GameStateType.EndGame);
         }
     }

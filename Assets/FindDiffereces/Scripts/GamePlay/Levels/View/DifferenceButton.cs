@@ -15,7 +15,6 @@ namespace FindDifferences.GamePlay
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("button " + Position);
             OnDifferenceClicked?.Invoke();
         }
 

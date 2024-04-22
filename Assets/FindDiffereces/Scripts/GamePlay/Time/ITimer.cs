@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.GamePlay
+namespace FindDifferences.GamePlay
 {
     public interface ITimer
     {

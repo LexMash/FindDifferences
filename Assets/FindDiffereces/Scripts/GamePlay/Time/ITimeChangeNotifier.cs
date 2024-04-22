@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.GamePlay.Time
+namespace FindDifferences.GamePlay.Time
 {
     public interface ITimeChangeNotifier
     {

@@ -2,7 +2,7 @@
 using FindDifferences.UI;
 using System;
 
-namespace FindDiffereces.Input
+namespace FindDifferences.Input
 {
     public sealed class GameInput : IDisposable
     {

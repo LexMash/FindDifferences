@@ -1,8 +1,6 @@
-﻿using FindDifferences.GamePlay;
-using FindDifferences.GamePlay.FX;
-using System;
+﻿using System;
 
-namespace FindDiffereces.GamePlay.FX
+namespace FindDifferences.GamePlay.FX
 {
     public class VisualFxController : IDisposable, IVisualFxController
     {

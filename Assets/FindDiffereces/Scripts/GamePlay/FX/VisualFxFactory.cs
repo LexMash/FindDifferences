@@ -1,14 +1,14 @@
-﻿using FindDiffereces.GamePlay.FX;
-using FindDiffereces.UI;
+﻿using FindDifferences.GamePlay.FX;
+using FindDifferences.UI;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace FindDiffereces.Factories
+namespace FindDifferences.Factories
 {
-    public sealed class VisualFxFactory : IDisposable, IVisualFxFactory, IInitializable
+    public sealed class VisualFxFactory : IDisposable, IVisualFxFactory
     {
         private readonly UIFxRoot _parent;
 
@@ -17,15 +17,17 @@ namespace FindDiffereces.Factories
         private readonly List<AsyncOperationHandle> _handles = new();
         private UIVisualFxBase _fx; //fortest
 
-        public VisualFxFactory(UIVisualFxBase fx, UIFxRoot parent)
+        public VisualFxFactory(UIFxRoot parent)
         {
-            _fx = fx;
             _parent = parent;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            //TODO prefab load
+            var handle = Addressables.LoadAssetAsync<GameObject>("TouchFx");
+            await handle.Task;
+            var go = handle.Result;
+            _fx = go.GetComponent<UIVisualFxBase>();
         }
 
         public UIVisualFxBase CreateFx(FxType type)
@@ -37,14 +39,15 @@ namespace FindDiffereces.Factories
                 fx = list[list.Count - 1];
                 list.Remove(fx);
 
-                _active.Add(fx);
+                if(list.Count == 0)
+                    _released.Remove(type);
             }
             else
             {
-                fx = UnityEngine.Object.Instantiate(_fx, _parent.Transform).GetComponent<UIVisualFxBase>();
-                _active.Add(fx);
+                fx = UnityEngine.Object.Instantiate(_fx, _parent.Transform).GetComponent<UIVisualFxBase>();             
             }
-            
+
+            _active.Add(fx);
             fx.Shown += FxShown;
 
             return fx;
@@ -52,8 +55,11 @@ namespace FindDiffereces.Factories
 
         public void HideAllCreated()
         {
-            foreach (var fx in _active)
+            for (int i = 0; i < _active.Count; i++)
+            {
+                UIVisualFxBase fx = _active[i];
                 fx.Hide();
+            }
         }
 
         public void Dispose()

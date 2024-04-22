@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.Infrastracture
+namespace FindDifferences.Infrastracture
 {
     public interface IAdsProvider
     {
@@ -8,6 +8,7 @@ namespace FindDiffereces.Infrastracture
         event Action AdsClosed;
         event Action<bool> AdsCashed;
 
+        void Initialize();
         void CasheAds();
         void ShowAds();
     }

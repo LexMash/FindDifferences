@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.Infrastracture.Purchase
+namespace FindDifferences.Infrastracture.Purchase
 {
     public interface IPurchaseNotifier
     {

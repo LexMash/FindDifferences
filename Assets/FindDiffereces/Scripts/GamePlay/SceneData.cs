@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FindDiffereces.GamePlay
+namespace FindDifferences.GamePlay
 {
     public class SceneData : MonoBehaviour
     {

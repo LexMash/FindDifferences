@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace FindDiffereces.Infrastracture
+namespace FindDifferences.Infrastracture
 {
     public interface IPurchaseProvider
     {
+        void Initialize();
         void Buy(string purchaseID);
     }
 }

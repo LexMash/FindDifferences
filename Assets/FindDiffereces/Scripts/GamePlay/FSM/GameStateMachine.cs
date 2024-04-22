@@ -1,5 +1,5 @@
-﻿using FindDiffereces.Factories;
-using FindDiffereces.GamePlay.FSM.States;
+﻿using FindDifferences.Factories;
+using FindDifferences.GamePlay.FSM.States;
 using FindDifferences.FSM.States;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,9 @@ namespace Infrastructure
             _stateMap[GameStateType.Wait] = _factory.CreateState<WaitTapState>();
             _stateMap[GameStateType.GamePlay] = _factory.CreateState<GamePlayState>();
             _stateMap[GameStateType.LevelRestart] = _factory.CreateState<RestartLevelState>();
+            _stateMap[GameStateType.EndGame] = _factory.CreateState<EndGameState>();
 
+            SetState(GameStateType.Init);
             _isInitialize = true;
         }
 
@@ -43,7 +45,7 @@ namespace Infrastructure
             }
             else
             {
-                throw new StateMachineException("StateMachine doesn't have this type of state");
+                throw new StateMachineException($"StateMachine doesn't have this {type} of state");
             }
         }
 

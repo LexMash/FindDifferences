@@ -1,8 +1,8 @@
-﻿using FindDiffereces.GamePlay.Levels;
-using FindDiffereces.Infrastracture.api;
+﻿using FindDifferences.GamePlay.Levels;
+using FindDifferences.Infrastracture.api;
 using System;
 
-namespace FindDiffereces.Infrastracture.DataSystem
+namespace FindDifferences.Infrastracture.DataSystem
 {
     public sealed class GameDataProvider : IDisposable
     {
@@ -20,6 +20,7 @@ namespace FindDiffereces.Infrastracture.DataSystem
             _levelNotifier = levelNotifier;
             _levelNotifier.LevelCompleted += OnLevelCompleted;
             _levelNotifier.LevelRestarted += OnLevelRestarted;
+            _levelNotifier.LevelChanged += OnLevelChanged;
         }
 
         public void Initialize()
@@ -27,10 +28,8 @@ namespace FindDiffereces.Infrastracture.DataSystem
             _gameData = _saveLoadService.Load();
         }
 
-        private void OnLevelRestarted()
-        {
-            SetWin(false);
-        }
+        private void OnLevelRestarted() => SetWin(false);
+        private void OnLevelChanged() => SetWin(false);
 
         private void OnLevelCompleted()
         {

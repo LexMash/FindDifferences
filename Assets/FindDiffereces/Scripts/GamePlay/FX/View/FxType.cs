@@ -1,4 +1,4 @@
-﻿namespace FindDiffereces.GamePlay.FX
+﻿namespace FindDifferences.GamePlay.FX
 {
     public enum FxType
     { 

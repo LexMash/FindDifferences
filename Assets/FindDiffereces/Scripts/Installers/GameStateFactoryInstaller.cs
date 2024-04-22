@@ -1,7 +1,7 @@
-﻿using FindDiffereces.Factories;
+﻿using FindDifferences.Factories;
 using Zenject;
 
-namespace FindDiffereces.Installers
+namespace FindDifferences.Installers
 {
     public class GameStateFactoryInstaller : MonoInstaller
     {

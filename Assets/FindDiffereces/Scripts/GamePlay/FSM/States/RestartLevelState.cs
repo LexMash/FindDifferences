@@ -1,12 +1,14 @@
-﻿using FindDiffereces.GamePlay.Levels;
+﻿using FindDifferences.GamePlay.Levels;
+using FindDifferences.Infrastracture;
 using Infrastructure;
 using StateMachine;
 
-namespace FindDiffereces.GamePlay.FSM.States
+namespace FindDifferences.GamePlay.FSM.States
 {
     public class RestartLevelState : GameStateBase
     {
         private readonly ILevelController _levelController;
+        private readonly IAdsProvider _adsProvider;
 
         public RestartLevelState(StateChangeProvider stateChangeProvider) : base(stateChangeProvider)
         {
@@ -17,7 +19,7 @@ namespace FindDiffereces.GamePlay.FSM.States
             base.Enter();
 
             _levelController.RestartLevel();
-
+            _adsProvider.CasheAds();
             _stateChangeProvider.ChangeState(GameStateType.Wait);
         }
     }

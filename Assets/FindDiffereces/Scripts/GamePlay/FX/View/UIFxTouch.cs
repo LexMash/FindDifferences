@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FindDiffereces.GamePlay.FX.View
+namespace FindDifferences.GamePlay.FX.View
 {
     public sealed class UIFxTouch : UIVisualFxBase
     {

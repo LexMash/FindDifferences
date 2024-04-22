@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace FindDiffereces.Data
+namespace FindDifferences.Data
 {
     [CreateAssetMenu (fileName = "New GameConfig", menuName = "FindDifferences/GameConfig")]
     public class GameConfig : ScriptableObject

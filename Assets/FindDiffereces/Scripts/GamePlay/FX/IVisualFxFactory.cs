@@ -1,9 +1,10 @@
-﻿using FindDiffereces.GamePlay.FX;
+﻿using FindDifferences.GamePlay.FX;
 
-namespace FindDiffereces.Factories
+namespace FindDifferences.Factories
 {
     public interface IVisualFxFactory
     {
+        void Initialize();
         UIVisualFxBase CreateFx(FxType type);
         void HideAllCreated();
     }

@@ -1,15 +1,14 @@
-﻿using FindDiffereces.UI;
+﻿using FindDifferences.UI;
 using FindDifferences.GamePlay;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace FindDiffereces.Infrastracture
+namespace FindDifferences.Infrastracture
 {
     public sealed class LevelLoader
     {
-        private readonly IAssetProvider _assetProvider;
         private readonly UIRoot _uiRoot;
 
         private const string LEVEL_PATH = "Level";
@@ -19,9 +18,8 @@ namespace FindDiffereces.Infrastracture
 
         private AsyncOperationHandle _asyncHadle;
 
-        public LevelLoader(IAssetProvider assetProvider, UIRoot uiRoot)
+        public LevelLoader(UIRoot uiRoot)
         {
-            _assetProvider = assetProvider;
             _uiRoot = uiRoot;
         }
 
@@ -41,11 +39,12 @@ namespace FindDiffereces.Infrastracture
 
             _currentLevelIndex = index;
 
-            _asyncHadle = Addressables.LoadAssetAsync<GameObject>(LEVEL_PATH + index);
+            _asyncHadle = Addressables.LoadAssetAsync<GameObject>(LEVEL_PATH + 0); //всегда загружаем 1 уровень для тестов
 
             await _asyncHadle.Task;
 
-            //_currentLevel = Object.Instantiate(_asyncHadle.Task.Result, _uiRoot.Transform).GetComponent<LevelView>();
+            var obj = _asyncHadle.Result as GameObject;
+            _currentLevel = Object.Instantiate(obj, _uiRoot.Transform).GetComponent<LevelView>();
 
             return _currentLevel;
         }
@@ -53,6 +52,7 @@ namespace FindDiffereces.Infrastracture
         private void UnLoadLevelCurrentLevel()
         {
             Addressables.Release(_asyncHadle);
+            Object.Destroy(_currentLevel.gameObject);
         }
     }
 }

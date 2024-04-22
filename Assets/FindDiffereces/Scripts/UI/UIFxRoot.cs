@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FindDiffereces.UI
+namespace FindDifferences.UI
 {
     public class UIFxRoot : MonoBehaviour
     {

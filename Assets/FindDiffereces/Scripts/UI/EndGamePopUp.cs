@@ -1,13 +1,12 @@
 using DG.Tweening;
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace FindDifferences.UI
 {
-    public class EndGamePopUp : MonoBehaviour, IInitializable, IRestartInput
+    public class EndGamePopUp : MonoBehaviour, IRestartInput
     {
         [SerializeField] private Image _rayCastBlockImage;
         [SerializeField] private RectTransform _popUpPanelTransform;
@@ -31,6 +30,14 @@ namespace FindDifferences.UI
 
         private Vector2 _startPosition;
 
+        private void Awake()
+        {
+            BlockRayCastEnable(false);
+            _startPosition = _popUpPanelTransform.position;
+            _appearTweener.SetAutoKill(false);
+            _disappearTweener.SetAutoKill(false);
+        }
+
         private void OnEnable()
         {
             _restartBttn.onClick.AddListener(RestartBttnClicked);
@@ -39,14 +46,6 @@ namespace FindDifferences.UI
         private void OnDisable()
         {
             _restartBttn.onClick.RemoveListener(RestartBttnClicked);
-        }
-
-        public void Initialize()
-        {
-            BlockRayCastEnable(false);
-            _startPosition = _popUpPanelTransform.position;
-            _appearTweener.SetAutoKill(false);
-            _disappearTweener.SetAutoKill(false);
         }
 
         public void Show(EndGameData data)
@@ -60,7 +59,7 @@ namespace FindDifferences.UI
         public void Hide()
         {
             BlockRayCastEnable(false);
-            _disappearTweener = _popUpPanelTransform.DOMove(_startPosition, _inSpeed).SetEase((_OutEase));
+            _disappearTweener = _popUpPanelTransform.DOMove(_startPosition, _outSpeed).SetEase((_OutEase));
         }
 
         private void BlockRayCastEnable(bool isEnable) => _rayCastBlockImage.enabled = isEnable;

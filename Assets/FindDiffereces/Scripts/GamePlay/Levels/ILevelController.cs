@@ -1,8 +1,8 @@
 ﻿using FindDifferences.GamePlay;
 
-namespace FindDiffereces.GamePlay.Levels
+namespace FindDifferences.GamePlay.Levels
 {
-    public interface ILevelController : ILevelStateNotifier
+    public interface ILevelController
     {
         void RestartLevel();
         void Init(LevelView level);

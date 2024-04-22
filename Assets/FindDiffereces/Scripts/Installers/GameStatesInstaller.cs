@@ -1,13 +1,15 @@
-﻿using FindDiffereces.GamePlay.FSM.States;
+﻿using FindDifferences.GamePlay.FSM.States;
 using FindDifferences.FSM.States;
 using Zenject;
+using StateMachine;
 
-namespace FindDiffereces.Installers
+namespace FindDifferences.Installers
 {
     public class GameStatesInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
+            Container.Bind<StateChangeProvider>().AsSingle().NonLazy();
             Container.Bind<InitializeState>().AsSingle().NonLazy();
             Container.Bind<LoadLevelState>().AsSingle().NonLazy();
             Container.Bind<RestartLevelState>().AsSingle().NonLazy();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.GamePlay.Time
+namespace FindDifferences.GamePlay.Time
 {
     public interface ITimeController
     {
@@ -12,5 +12,6 @@ namespace FindDiffereces.GamePlay.Time
         void AddTime(float time);
         void Start();
         void Stop();
+        void Reset();
     }
 }

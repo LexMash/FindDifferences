@@ -1,7 +1,7 @@
 ﻿using Infrastructure;
 using Zenject;
 
-namespace FindDiffereces.Factories
+namespace FindDifferences.Factories
 {
     public class GameStateFactory
     {

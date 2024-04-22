@@ -1,10 +1,10 @@
-﻿using FindDiffereces.Infrastracture.api;
+﻿using FindDifferences.Infrastracture.api;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using UnityEngine;
 
-namespace FindDiffereces.Infrastracture.DataSystem
+namespace FindDifferences.Infrastracture.DataSystem
 {
     public class JsonSaveLoadService : ISaveLoadService
     {

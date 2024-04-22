@@ -1,10 +1,10 @@
-﻿using FindDiffereces.Data;
+﻿using FindDifferences.Data;
 using FindDifferences.UI;
 using System;
 using UnityEngine;
 using Zenject;
 
-namespace FindDiffereces.GamePlay.Time
+namespace FindDifferences.GamePlay.Time
 {
     public class TimeController : ITimeController, ITickable, IDisposable, ITimeChangeNotifier
     {
@@ -41,8 +41,14 @@ namespace FindDiffereces.GamePlay.Time
             TimeOut?.Invoke();
         }
 
-        public void Start()
+        public void Reset()
         {
+            CurrentTimeString = ConvertTimeToString(_gameConfig.TimeForFindInSeconds);
+            _widget.UpdateView(CurrentTimeString);
+        }
+
+        public void Start()
+        {           
             _isActive = true;
             _counter = UPDATE_INTERVAL;
 

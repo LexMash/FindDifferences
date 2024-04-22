@@ -18,8 +18,7 @@ namespace Infrastructure
         public virtual void Exit() 
             => Debug.Log($"Exit State {GetType().Name}");
 
-        public virtual void Update() 
-            => Debug.Log("Update");
+        public virtual void Update() { }
     }
 }
 

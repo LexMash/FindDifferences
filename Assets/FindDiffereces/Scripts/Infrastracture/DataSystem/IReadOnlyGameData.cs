@@ -1,4 +1,4 @@
-﻿namespace FindDiffereces.Infrastracture.DataSystem
+﻿namespace FindDifferences.Infrastracture.DataSystem
 {
     public interface IReadOnlyGameData
     {

@@ -2,11 +2,10 @@
 using AppodealAds.Unity.Common;
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace FindDiffereces.Infrastracture.Ads
+namespace FindDifferences.Infrastracture.Ads
 {
     public class AppodealAdsProvider : IAdsProvider, IInterstitialAdListener, IInitializable, IAppodealInitializationListener
     {
@@ -24,71 +23,27 @@ namespace FindDiffereces.Infrastracture.Ads
         public event Action AdsClosed;
         public event Action<bool> AdsCashed;
 
-        private TextMeshProUGUI _textPanel;
-
-        public AppodealAdsProvider(TextMeshProUGUI textPanel)
-        {
-            _textPanel = textPanel;
-        }
-
         public void Initialize()
         {
-            _textPanel.text = "in Initiolize";
-
             Appodeal.setLogLevel(Appodeal.LogLevel.Verbose);
-
-            _textPanel.text = "log set";
 
             Appodeal.setTesting(true);
 
-            _textPanel.text = "test set";
-
             Appodeal.setUseSafeArea(true);
-
-            _textPanel.text = "unsafe area";
-
-            //Appodeal.setUserId("1");
-            //Appodeal.setCustomFilter(UserSettings.USER_AGE, 18);
-            //Appodeal.setCustomFilter(UserSettings.USER_GENDER, (int)UserSettings.Gender.MALE);
-
-            _textPanel.text = "set filetrs";
-
-            //Appodeal.setExtraData("testKey", "testValue");
-            //Appodeal.resetExtraData("testKey");
-
-            _textPanel.text = "extra data";
-
-            //Appodeal.disableLocationPermissionCheck();
-            //Appodeal.setChildDirectedTreatment(false);
-
-            _textPanel.text = "permisison";
 
             Appodeal.setTriggerOnLoadedOnPrecache(Appodeal.INTERSTITIAL, true);
             Appodeal.setAutoCache(Appodeal.INTERSTITIAL, false);
 
-            _textPanel.text = "INTERSTITIAL";
-
-            //Appodeal.disableNetwork(AppodealNetworks.VUNGLE);
-            //Appodeal.disableNetwork(AppodealNetworks.YANDEX, Appodeal.MREC);
-
-            _textPanel.text = "disableNetwork";
+            Appodeal.disableNetwork(AppodealNetworks.VUNGLE);
+            Appodeal.disableNetwork(AppodealNetworks.YANDEX, Appodeal.MREC);
 
             Appodeal.setInterstitialCallbacks(this);
 
-            //Appodeal.setCustomFilter("newBoolean", true);
-            //Appodeal.setCustomFilter("newInt", 1234567890);
-            //Appodeal.setCustomFilter("newDouble", 123.123456789);
-            //Appodeal.setCustomFilter("newString", "newStringFromSDK");
-
-            _textPanel.text = "custom callback";
-
             Appodeal.initialize(appKey, Appodeal.INTERSTITIAL, null);
-            _textPanel.text = "end Initiolize";
         }
 
         public void CasheAds()
         {
-            _textPanel.text = "Ads cahed start";
             Appodeal.cache(Appodeal.INTERSTITIAL);
         }
 
@@ -96,7 +51,6 @@ namespace FindDiffereces.Infrastracture.Ads
         {
             if (Appodeal.isLoaded(Appodeal.INTERSTITIAL) && Appodeal.canShow(Appodeal.INTERSTITIAL, "default") && !Appodeal.isPrecache(Appodeal.INTERSTITIAL))
             {
-                _textPanel.text = "Ads show";
                 Appodeal.show(Appodeal.INTERSTITIAL);
             }
             else
@@ -113,7 +67,7 @@ namespace FindDiffereces.Infrastracture.Ads
         public void onInterstitialClosed()
         {
             Debug.Log("Interstitial Closed");
-            //AdsClosed?.Invoke();
+            AdsClosed?.Invoke();
         }
 
         public void onInterstitialExpired()
@@ -129,8 +83,7 @@ namespace FindDiffereces.Infrastracture.Ads
         public void onInterstitialLoaded(bool isPrecache)
         {
             Debug.Log("Interstitial Loaded");
-            _textPanel.text = "Interstitial Loaded";
-            //AdsCashed?.Invoke(isPrecache);
+            AdsCashed?.Invoke(isPrecache);
         }
 
         public void onInterstitialShowFailed()
@@ -141,14 +94,11 @@ namespace FindDiffereces.Infrastracture.Ads
         public void onInterstitialShown()
         {
             Debug.Log("Interstitial Shown");
-            _textPanel.text = "Interstitial Shown";
-            //AdsShown?.Invoke();
+            AdsShown?.Invoke();
         }
 
         public void onInitializationFinished(List<string> errors)
         {
-            _textPanel.text = errors[0];
-
             string output = errors == null ? string.Empty : string.Join(", ", errors);
             Debug.Log($"onInitializationFinished(errors:[{output}])");
 

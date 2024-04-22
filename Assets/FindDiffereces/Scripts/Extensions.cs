@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FindDiffereces
+namespace FindDifferences
 {
     public static class Extensions
     {

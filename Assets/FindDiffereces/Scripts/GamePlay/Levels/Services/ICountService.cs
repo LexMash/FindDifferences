@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindDiffereces.GamePlay.Levels
+namespace FindDifferences.GamePlay.Levels
 {
     public interface ICountService
     {

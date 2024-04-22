@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FindDiffereces.GamePlay.FX
+namespace FindDifferences.GamePlay.FX
 {
     public abstract class UIVisualFxBase : MonoBehaviour
     {
