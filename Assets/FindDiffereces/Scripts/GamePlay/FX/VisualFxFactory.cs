@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 namespace FindDifferences.Factories
 {
@@ -14,8 +15,9 @@ namespace FindDifferences.Factories
 
         private readonly Dictionary<FxType, List<UIVisualFxBase>> _released = new();
         private readonly List<UIVisualFxBase> _active = new();
-        private readonly List<AsyncOperationHandle> _handles = new();
-        private UIVisualFxBase _fx; //fortest
+        //private readonly List<AsyncOperationHandle> _handles = new();
+        private AsyncOperationHandle<GameObject> _handle;
+        private UIVisualFxBase _fx;
 
         public VisualFxFactory(UIFxRoot parent)
         {
@@ -24,9 +26,9 @@ namespace FindDifferences.Factories
 
         public async void Initialize()
         {
-            var handle = Addressables.LoadAssetAsync<GameObject>("TouchFx");
-            await handle.Task;
-            var go = handle.Result;
+            _handle = Addressables.LoadAssetAsync<GameObject>("TouchFx");
+            await _handle.Task;
+            var go = _handle.Result;
             _fx = go.GetComponent<UIVisualFxBase>();
         }
 
@@ -44,7 +46,7 @@ namespace FindDifferences.Factories
             }
             else
             {
-                fx = UnityEngine.Object.Instantiate(_fx, _parent.Transform).GetComponent<UIVisualFxBase>();             
+                fx = Object.Instantiate(_fx, _parent.Transform).GetComponent<UIVisualFxBase>();             
             }
 
             _active.Add(fx);
@@ -58,8 +60,12 @@ namespace FindDifferences.Factories
             for (int i = 0; i < _active.Count; i++)
             {
                 UIVisualFxBase fx = _active[i];
-                fx.Hide();
+
+                AddToReleased(fx);
+                fx.gameObject.SetActive(false);
             }
+
+            _active.Clear();
         }
 
         public void Dispose()
@@ -72,12 +78,12 @@ namespace FindDifferences.Factories
             _released.Clear();
             _active.Clear();
 
-            foreach(var handle in _handles)
-            {
-                Addressables.Release(handle);
-            }
+            //foreach(var handle in _handles)
+            //{
+            //    Addressables.Release(handle);
+            //}
 
-            _handles.Clear();
+            //_handles.Clear();
         }
 
         private void FxShown(UIVisualFxBase fx)

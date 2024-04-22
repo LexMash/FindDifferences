@@ -12,7 +12,7 @@ namespace FindDifferences.Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<JsonSaveLoadService>().AsSingle();
-            Container.Bind<GameDataProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameDataProvider>().AsSingle();
             Container.Bind<GameConfig>().FromInstance(_config).AsSingle();
         }
     }

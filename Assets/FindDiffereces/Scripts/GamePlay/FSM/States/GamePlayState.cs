@@ -38,16 +38,14 @@ namespace FindDifferences.GamePlay.FSM.States
         { 
             base.Exit();
 
-            _fxController.HideAllFx();
+            _timeController.Stop();
 
             _levelStateNotifier.LevelCompleted -= ChangeState;
             _timeController.TimeOut -= ChangeState;
         }
 
         private void ChangeState()
-        {
-            _timeController.Stop();
-
+        {                   
             _stateChangeProvider.ChangeState(GameStateType.EndGame);
         }
     }

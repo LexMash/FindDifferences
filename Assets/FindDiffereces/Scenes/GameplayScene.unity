@@ -156,6 +156,7 @@ RectTransform:
   m_Children:
   - {fileID: 1976219720}
   - {fileID: 169112339}
+  - {fileID: 131464974}
   m_Father: {fileID: 1236770937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -383,6 +384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131464974}
   - component: {fileID: 131464976}
+  - component: {fileID: 131464977}
   m_Layer: 5
   m_Name: AdsLoggerPanel
   m_TagString: Untagged
@@ -397,13 +399,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131464973}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 603055752}
-  m_Father: {fileID: 1370866679}
+  m_Father: {fileID: 15963900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -418,6 +420,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131464973}
   m_CullTransparentMesh: 1
+--- !u!114 &131464977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131464973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282b066f2634e9847aa0c56e4c8c4c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textMesh: {fileID: 603055753}
 --- !u!1 &169112338
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f66743ab4f23ef46a5a88c2adad50b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _panel: {fileID: 131464977}
 --- !u!4 &232100842
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,7 +1268,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 19}
-  m_SizeDelta: {x: 636.57, y: 50}
+  m_SizeDelta: {x: 636.57, y: 97.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &603055753
 MonoBehaviour:
@@ -1274,7 +1290,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Log
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1837,6 +1853,7 @@ MonoBehaviour:
   - {fileID: 519107530}
   - {fileID: 2100179638}
   - {fileID: 1524963324}
+  - {fileID: 1443865301}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1875,6 +1892,7 @@ Transform:
   - {fileID: 519107531}
   - {fileID: 2100179639}
   - {fileID: 1524963323}
+  - {fileID: 1443865302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1234075978
@@ -2250,7 +2268,6 @@ RectTransform:
   - {fileID: 2041630759}
   - {fileID: 1654705282}
   - {fileID: 755367127}
-  - {fileID: 131464974}
   m_Father: {fileID: 1236770937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2481,6 +2498,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390801850}
   m_CullTransparentMesh: 1
+--- !u!1 &1443865300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1443865302}
+  - component: {fileID: 1443865301}
+  m_Layer: 0
+  m_Name: LevelPanelUIInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1443865301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443865300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271ddefc18efafb41ab6bbab6396459d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelLabelWidget: {fileID: 1767181318}
+--- !u!4 &1443865302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443865300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1098908746}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1524963322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2784,7 @@ GameObject:
   - component: {fileID: 1748118246}
   - component: {fileID: 1748118245}
   - component: {fileID: 1748118247}
+  - component: {fileID: 1748118248}
   m_Layer: 5
   m_Name: BuyTimeButton
   m_TagString: Untagged
@@ -2831,6 +2894,34 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1748118248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748118243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: more_time
+  buttonType: 0
+  consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  button: {fileID: 1748118247}
 --- !u!1 &1767181314
 GameObject:
   m_ObjectHideFlags: 0

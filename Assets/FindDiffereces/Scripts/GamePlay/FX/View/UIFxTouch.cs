@@ -29,8 +29,8 @@ namespace FindDifferences.GamePlay.FX.View
 
         public override void Hide()
         {
-            OnShown();
             gameObject.SetActive(false);
+            OnShown();         
         }
 
         protected override void Reset()

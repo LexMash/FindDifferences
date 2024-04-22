@@ -21,14 +21,12 @@ namespace FindDifferences
         public void Show()
         {
             BlockRaycastEnable(true);
-
-            _canvasGroup.DOFade(1f, _appearsTime);
+            _canvasGroup.alpha = 1f;
         }
 
         private void Hide()
         {
             BlockRaycastEnable(false);
-
             _canvasGroup.DOFade(0f, _appearsTime);
         }
 

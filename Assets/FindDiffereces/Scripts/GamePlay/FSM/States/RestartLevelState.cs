@@ -9,14 +9,25 @@ namespace FindDifferences.GamePlay.FSM.States
     {
         private readonly ILevelController _levelController;
         private readonly IAdsProvider _adsProvider;
+        private readonly ITapForStartWidget _tapForStartWidget;
 
-        public RestartLevelState(StateChangeProvider stateChangeProvider) : base(stateChangeProvider)
+        public RestartLevelState(
+            StateChangeProvider stateChangeProvider,
+            IAdsProvider adsProvider,
+            ILevelController levelController,
+            ITapForStartWidget tapForStartWidget
+            ) : base(stateChangeProvider)
         {
+            _adsProvider = adsProvider;
+            _levelController = levelController;
+            _tapForStartWidget = tapForStartWidget;
         }
 
         public override void Enter()
         {
             base.Enter();
+
+            _tapForStartWidget.Show();
 
             _levelController.RestartLevel();
             _adsProvider.CasheAds();

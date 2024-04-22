@@ -16,7 +16,7 @@ namespace FindDifferences.Infrastracture
         private int _currentLevelIndex;
         private LevelView _currentLevel;
 
-        private AsyncOperationHandle _asyncHadle;
+        private AsyncOperationHandle<GameObject> _asyncHadle;
 
         public LevelLoader(UIRoot uiRoot)
         {
@@ -43,16 +43,15 @@ namespace FindDifferences.Infrastracture
 
             await _asyncHadle.Task;
 
-            var obj = _asyncHadle.Result as GameObject;
-            _currentLevel = Object.Instantiate(obj, _uiRoot.Transform).GetComponent<LevelView>();
+            _currentLevel = Object.Instantiate(_asyncHadle.Result, _uiRoot.Transform).GetComponent<LevelView>();
 
             return _currentLevel;
         }
 
         private void UnLoadLevelCurrentLevel()
-        {
-            Addressables.Release(_asyncHadle);
+        {           
             Object.Destroy(_currentLevel.gameObject);
+            Addressables.Release(_asyncHadle);
         }
     }
 }

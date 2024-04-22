@@ -4,7 +4,7 @@ using System;
 
 namespace FindDifferences.Infrastracture.DataSystem
 {
-    public sealed class GameDataProvider : IDisposable
+    public sealed class GameDataProvider : IDisposable, IGameDataChangeNotifier
     {
         public event Action DataChanged;
         public IReadOnlyGameData Data => _gameData;
@@ -12,11 +12,11 @@ namespace FindDifferences.Infrastracture.DataSystem
         private readonly ILevelStateNotifier _levelNotifier;
         private readonly ISaveLoadService _saveLoadService;
         private GameData _gameData;
-     
-        public GameDataProvider(ISaveLoadService saveLoadService, ILevelStateNotifier levelNotifier) 
+
+        public GameDataProvider(ISaveLoadService saveLoadService, ILevelStateNotifier levelNotifier)
         {
             _saveLoadService = saveLoadService;
-            
+
             _levelNotifier = levelNotifier;
             _levelNotifier.LevelCompleted += OnLevelCompleted;
             _levelNotifier.LevelRestarted += OnLevelRestarted;
@@ -26,6 +26,7 @@ namespace FindDifferences.Infrastracture.DataSystem
         public void Initialize()
         {
             _gameData = _saveLoadService.Load();
+            DataChanged?.Invoke();
         }
 
         private void OnLevelRestarted() => SetWin(false);
@@ -38,7 +39,7 @@ namespace FindDifferences.Infrastracture.DataSystem
 
             DataChanged?.Invoke();
 
-            _saveLoadService.Save(_gameData);          
+            _saveLoadService.Save(_gameData);
         }
 
         private void SetWin(bool isWin)

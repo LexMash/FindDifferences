@@ -58,7 +58,7 @@ namespace FindDifferences.GamePlay.FSM.States
         {
             _adsProvider.AdsShown += AdsShown;
 
-            _adsProvider.ShowAds();       
+            _adsProvider.ShowAds();
         }
 
         private void AdsShown()
